@@ -1,14 +1,21 @@
 #summary One-sentence summary of this page.
+#labels license,csipsimple,GPLv3
+#sidebar TableOfContents
 <wiki:toc />
 
 = Introduction =
 
-The application is a fork of the CSipSimple app. As such, ABC-VoIP inherits the same GPLv3 license.
+The application is a fork of the CSipSimple app. As such, ABC-VoIP inherits the same structure and GPLv3 license.
+
+The project is globally compounded of 3 main parts :
+
+  * The ABC-VoIP for of CSipSimple, which is the Java application for Android
+  * pjsip_android/jni which is the android portage of pjsip for Android
+  * pjsip which is checked out at build time.
+
+There is also additional parts to bring other features such as codec or encryption.
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+In order to avoid misinformation and misleading details, we recommend reading the licensing details as they are explained on the [http://code.google.com/p/csipsimple/wiki/Licensing CSipSimple wiki].
