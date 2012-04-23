@@ -5,7 +5,7 @@
 
 = Introduction =
 
-The application is a fork of the CSipSimple app. As such, ABC-VoIP inherits the same structure and GPLv3 license.
+The ABC-VoIP application is a fork of the CSipSimple app. As such, ABC-VoIP inherits the same structure and GPLv3 license.
 
 The project is globally compounded of 3 main parts :
 
@@ -13,7 +13,8 @@ The project is globally compounded of 3 main parts :
   * pjsip_android/jni which is the android portage of pjsip for Android
   * pjsip which is checked out at build time.
 
-There is also additional parts to bring other features such as codec or encryption.
+There is also additional parts to bring other features such as codec or 
+encryption.
 
 
 = Details =
