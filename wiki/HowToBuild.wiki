@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Simple instructions on how to get from source code to application.
 
 = Introduction =
 
