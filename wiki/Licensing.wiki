@@ -1,6 +1,5 @@
 #summary Licensing information
 #labels license,csipsimple,GPLv3
-#sidebar TableOfContents
 <wiki:toc />
 
 = Licensing =
