@@ -43,9 +43,6 @@ public class Faq extends DialogFragment {
         return new Faq();
     }
 	
-	
-
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

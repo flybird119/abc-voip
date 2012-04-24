@@ -132,21 +132,29 @@ public class Help extends DialogFragment implements OnItemClickListener {
 		}
 		
 		// Log collector
+		
+		// ABC-VoIP Modification: disable log collection and sending
+		// since appears to be more confusing than useful.
+		/*
 		if(!TextUtils.isEmpty(CustomDistribution.getSupportEmail()) ) {
 			if(isRecording()) {
 		        items.add(new HelpEntry( android.R.drawable.ic_menu_send , R.string.send_logs, SEND_LOGS));
-			}else {
+			} else {
 		        items.add(new HelpEntry( android.R.drawable.ic_menu_save , R.string.record_logs, START_LOGS));
 			}
 		}
-
+		 */
+		
         items.add(new HelpEntry(android.R.drawable.ic_menu_gallery, R.string.legal_information, LEGALS));
         
+        // ABC-VoIP Modification: disable nightly updates, to avoid confusion in customers
+        /*
         PackageInfo pinfo = PreferencesProviderWrapper.getCurrentPackageInfos(getActivity());
 		if(pinfo != null && pinfo.applicationInfo.icon == R.drawable.ic_launcher_nightly) {
 			items.add(new HelpEntry(R.drawable.ic_launcher_nightly, R.string.update_nightly_build, NIGHTLY));
 		}
-		
+		*/
+        
         lv.setAdapter(new HelpArrayAdapter(getActivity(), items));
         
         TextView tv = (TextView) v.findViewById(android.R.id.text1);
@@ -209,6 +217,9 @@ public class Help extends DialogFragment implements OnItemClickListener {
 			break;
 		case NIGHTLY:
 			// We have to check for an update
+			
+			// ABC-VoIP Modification: disabled all nightly updates
+			/*
 			final NightlyUpdater nu = new NightlyUpdater(getActivity());
 			Thread t = new Thread() {
 				public void run() {
@@ -219,6 +230,7 @@ public class Help extends DialogFragment implements OnItemClickListener {
 				};
 			};
 			t.start();
+			*/
 			break;
 		case SEND_LOGS:
 			prefsWrapper.setPreferenceStringValue(SipConfigManager.LOG_LEVEL, "1");
