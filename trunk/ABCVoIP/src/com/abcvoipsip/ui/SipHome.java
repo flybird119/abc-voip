@@ -30,6 +30,7 @@ import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBar;
 import android.support.v4.app.ActionBar.Tab;
@@ -77,6 +78,7 @@ public class SipHome extends FragmentActivity {
     public static final int CLOSE_MENU = Menu.FIRST + 3;
     public static final int HELP_MENU = Menu.FIRST + 4;
     public static final int DISTRIB_ACCOUNT_MENU = Menu.FIRST + 5;
+    public static final int DISTRIB_ACCOUNT_SIGNUP_MENU = Menu.FIRST + 6;
 
 
     private static final String THIS_FILE = "SIP_HOME";
@@ -585,9 +587,14 @@ public class SipHome extends FragmentActivity {
 
         WizardInfo distribWizard = CustomDistribution.getCustomDistributionWizard();
         if (distribWizard != null) {
-            menu.add(Menu.NONE, DISTRIB_ACCOUNT_MENU, Menu.NONE, "My " + distribWizard.label)
+            menu.add(Menu.NONE, DISTRIB_ACCOUNT_MENU, Menu.NONE, "My Account")
                     .setIcon(distribWizard.icon)
                     .setShowAsAction(ifRoomIfSplit);
+            
+            // ABC-VoIP Modification: make signup button/link to distribution provider
+            menu.add(Menu.NONE, DISTRIB_ACCOUNT_SIGNUP_MENU, Menu.NONE, "Sign Up")
+            		.setIcon(distribWizard.icon)
+            		.setShowAsAction(ifRoomIfSplit);
         }
         if (CustomDistribution.distributionWantsOtherAccounts()) {
             menu.add(Menu.NONE, ACCOUNTS_MENU, Menu.NONE,
@@ -650,6 +657,13 @@ public class SipHome extends FragmentActivity {
                 // Create the fragment and show it as a dialog.
                 DialogFragment newFragment = Help.newInstance();
                 newFragment.show(getSupportFragmentManager(), "dialog");
+                return true;
+            case DISTRIB_ACCOUNT_SIGNUP_MENU:
+                // Open the signup page
+            	Intent itt = new Intent(Intent.ACTION_VIEW);
+    			itt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    			itt.setData(Uri.parse("http://m.abc-voip.com/#page2"));
+    			startActivity(itt);
                 return true;
             case DISTRIB_ACCOUNT_MENU:
                 WizardInfo distribWizard = CustomDistribution.getCustomDistributionWizard();

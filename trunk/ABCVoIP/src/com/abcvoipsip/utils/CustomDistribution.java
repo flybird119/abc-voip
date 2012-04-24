@@ -92,7 +92,7 @@ public final class CustomDistribution {
 	 * @return link to the FAQ
 	 */
 	public static String getFaqLink() {
-		return "http://abc-voip.com/FAQ.html";
+		return "http://www.abc-voip.com/FAQ.html";
 	}
 	
 	/**
