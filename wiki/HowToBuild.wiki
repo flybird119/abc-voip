@@ -3,7 +3,7 @@
 
 = Preamble =
 
-Before building, it is important that you read the [Licensing] page. This ABC-VoIP app is GPLv3, and it is really *necessary* to understand what that means before developing or distributing this application or modified copies.
+Before building, it is important that you read the [Licensing Licensing] page. This ABC-VoIP app is GPLv3, and it is really *necessary* to understand what that means before developing or distributing this application or modified copies.
 
 = Basics =
 
