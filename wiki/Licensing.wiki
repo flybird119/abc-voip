@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Licensing information
 #labels license,csipsimple,GPLv3
 #sidebar TableOfContents
 <wiki:toc />
