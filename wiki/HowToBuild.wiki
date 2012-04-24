@@ -1,5 +1,5 @@
 #summary Simple instructions on how to get from source code to application.
-#labels android,compilation,linux,source,Featured
+#labels android,compilation,linux,source,Featured,Phase-Deploy
 
 = Preamble =
 
