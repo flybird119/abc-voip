@@ -3,7 +3,7 @@
 #sidebar TableOfContents
 <wiki:toc />
 
-= Introduction =
+= Licensing =
 
 The ABC-VoIP application is a fork of the CSipSimple app. As such, ABC-VoIP inherits the same structure and GPLv3 license.
 
@@ -17,6 +17,4 @@ There is also additional parts to bring other features such as codec or
 encryption.
 
 
-= Details =
-
-In order to avoid misinformation and misleading details, we recommend reading the licensing details as they are explained on the [http://code.google.com/p/csipsimple/wiki/Licensing CSipSimple wiki].
+In order to avoid misinformation and misleading details on our part, we strongly recommend reading the original licensing details as they are explained on the [http://code.google.com/p/csipsimple/wiki/Licensing CSipSimple wiki].
