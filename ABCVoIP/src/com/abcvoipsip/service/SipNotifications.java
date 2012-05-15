@@ -21,6 +21,8 @@
 
 package com.abcvoipsip.service;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -64,6 +66,7 @@ public class SipNotifications {
 	public static final int CALLLOG_NOTIF_ID = REGISTER_NOTIF_ID + 2;
 	public static final int MESSAGE_NOTIF_ID = REGISTER_NOTIF_ID + 3;
 	public static final int VOICEMAIL_NOTIF_ID = REGISTER_NOTIF_ID + 4;
+	public static final int REGISTER_FAILED_NOTIF_ID = REGISTER_NOTIF_ID + 5;
 
 	private static boolean isInit = false;
 
@@ -176,6 +179,7 @@ public class SipNotifications {
 			Log.e(THIS_FILE, "Trying to create a service notification from outside the service");
 			return;
 		}
+		
 		int icon = R.drawable.ic_stat_sipok;
 		CharSequence tickerText = context.getString(R.string.service_ticker_registered_text);
 		long when = System.currentTimeMillis();
@@ -199,9 +203,45 @@ public class SipNotifications {
 			notification.number = activeAccountsInfos.size();
 		}
 
+		stopForegroundCompat(REGISTER_FAILED_NOTIF_ID);
+		stopForegroundCompat(REGISTER_NOTIF_ID);
+		
 		startForegroundCompat(REGISTER_NOTIF_ID, notification);
 	}
 
+	public synchronized void notifyFailedRegisteredAccounts() {
+		if (!isServiceWrapper) {
+			Log.e(THIS_FILE, "Trying to create a service notification from outside the service");
+			return;
+		}
+		
+		int icon = R.drawable.ic_stat_sipok;
+		CharSequence tickerText = context.getString(R.string.not_registered_text);
+		long when = System.currentTimeMillis();
+
+		Notification notification = new Notification(icon, tickerText, when);
+
+		Intent notificationIntent = new Intent(SipManager.ACTION_SIP_DIALER);
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+		
+		RegistrationNotification contentView = new RegistrationNotification(context.getPackageName());
+		contentView.clearRegistrations();
+		
+		//notification.setLatestEventInfo(context, "", "", contentIntent);
+		
+		notification.contentIntent = contentIntent;
+		notification.contentView = contentView;
+		notification.flags = Notification.FLAG_ONLY_ALERT_ONCE;
+		
+		stopForegroundCompat(REGISTER_FAILED_NOTIF_ID);
+		stopForegroundCompat(REGISTER_NOTIF_ID);
+		
+		
+		
+		startForegroundCompat(REGISTER_FAILED_NOTIF_ID, notification);
+	}
+	
 	// Calls
 	public void showNotificationForCall(SipCallSession currentCallInfo2) {
 		// This is the pending call notification

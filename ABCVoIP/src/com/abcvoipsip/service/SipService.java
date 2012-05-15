@@ -21,6 +21,7 @@
 
 package com.abcvoipsip.service;
 
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -45,6 +46,7 @@ import android.os.PowerManager.WakeLock;
 import android.os.RemoteException;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.abcvoipsip.R;
@@ -88,7 +90,7 @@ public class SipService extends Service {
 	// static boolean creating = false;
 	private static final String THIS_FILE = "SIP SRV";
 
-    
+    private static Toast negNotification = null;
 
 	
 	private SipWakeLock sipWakeLock;
@@ -1204,8 +1206,6 @@ public class SipService extends Service {
 		}
 		
 		Collections.sort(activeProfilesState, SipProfileState.getComparator());
-		
-		
 
 		// Handle status bar notification
 		if (activeProfilesState.size() > 0 && 
@@ -1213,7 +1213,13 @@ public class SipService extends Service {
 		// Testing memory / CPU leak as per issue 676
 		//	for(int i=0; i < 10; i++) {
 		//		Log.d(THIS_FILE, "Notify ...");
+				if(negNotification != null) {
+					negNotification.cancel();
+					negNotification.setText(R.string.service_ticker_registered_text);
+					negNotification.show();
+				}
 				notificationManager.notifyRegisteredAccounts(activeProfilesState, prefsWrapper.getPreferenceBooleanValue(SipConfigManager.ICON_IN_STATUS_BAR_NBR));
+				
 		//		try {
 		//			Thread.sleep(6000);
 		//		} catch (InterruptedException e) {
@@ -1222,20 +1228,26 @@ public class SipService extends Service {
 		//	}
 		} else {
 			notificationManager.cancelRegisters();
+
+			negNotification = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+			negNotification.setText(R.string.not_registered_text);
+			negNotification.setGravity(Gravity.CENTER, 0, 0);
+			negNotification.show();
 		}
 		
 		if(hasSomeActiveAccount) {
+			
 			acquireResources();
-		}else {
+		} else {
 			releaseResources();
 		}
 	}
 	
 	/**
-	 * Get the currently instanciated prefsWrapper (to be used by
+	 * Get the currently instantiated prefsWrapper (to be used by
 	 * UAStateReceiver)
 	 * 
-	 * @return the preferenceWrapper instanciated
+	 * @return the preferenceWrapper instantiated
 	 */
 	public PreferencesProviderWrapper getPrefs() {
 		// Is never null when call so ok, just not check...
