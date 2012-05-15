@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.abcvoipsip"
     android:installLocation="auto"
-    android:versionCode="1343"
-    android:versionName="0.04-00" >
+    android:versionCode="1345"
+    android:versionName="0.04-10" >
 
     <supports-screens
         android:anyDensity="true"
